@@ -1,0 +1,282 @@
+#include <iostream>
+#include<algorithm>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+// Function
+
+void function()
+{
+    int arr[] = { 3, 5, 2, 4, 7 };
+    int n = sizeof(arr)/sizeof(arr[0]);
+ 
+    sort(arr, arr + n);
+ 
+    for (int const &i: arr) 
+    {
+        cout<<i<<' ';
+    }
+}
+
+
+// Class Object
+
+class Room 
+{
+
+   public:
+    double length;
+    double breadth;
+    double height;
+
+    double calculateArea() {
+        return length * breadth;
+    }
+
+    double calculateVolume() {
+        return length * breadth * height;
+    }
+};
+
+
+// Inheritance
+
+class Animal //base class
+{
+
+   public:
+    void eat() {
+        cout << "I can eat!" << endl;
+    }
+
+    void sleep() {
+        cout << "I can sleep!" << endl;
+    }
+};
+class Dog : public Animal //derived class
+{
+ 
+   public:
+    void bark() {
+        cout << "I can bark! Woof woof!!" << endl;
+    }
+};
+
+
+// Constructor & Destructor
+
+class class_name
+{
+    //declaring private class data members 
+    private:
+    int a,b;
+    
+    public:
+    // declaring Constructor
+    class_name(int aa, int bb)
+    {
+        cout<<"Constructor is called"<<endl;
+        a = aa;
+        b = bb;
+        cout<<"Value of a: "<<a<<endl;
+        cout<<"Value of b: "<<b<<endl;
+        cout<<endl;
+    }
+    // declaring destructor
+    ~class_name()
+    {
+        cout<<"Destructor is called"<<endl;
+        cout<<"Value of a: "<<a<<endl;
+        cout<<"Value of b: "<<b<<endl;
+    }
+};
+
+
+// Polymorphism
+
+float area(int r)
+{
+    float a;
+    float pi = 3.14;
+    a = pi * r * r;
+    return a;
+}
+int area(int l, int b)
+{
+    float a1;
+    a1 = l * b;
+    return a1;
+}
+float area(int n, int bs, int h)
+{
+    float a2;
+    a2 = n * bs * h;
+    return a2;
+}
+
+
+// Templatte
+
+template<class t1,class t2>
+void sum(t1 a,t2 b) 
+{
+    cout<<"\nSum="<<a+b<<endl;
+}
+// Operator Overloading
+class Count {
+   private:
+    int value;
+
+   public:
+
+    // Constructor to initialize count to 5
+    Count() : value(5) {}
+
+    // Overload ++ when used as prefix
+    void operator ++ () {
+        ++value;
+    }
+
+    void display() {
+        cout << "Count: " << value << endl;
+    }
+};
+
+
+// Exception Handling
+
+void fun(int *ptr, int x)
+{
+    if (ptr == NULL)
+        throw ptr;
+    if (x == 0)
+        throw x;
+    /* Some functionality */
+}
+int main()
+{
+    int c, n;
+    do
+    {
+        cout<<"Enter 1 for Function , 2 for Class & Object , 3 for Inheritance , 4 for Constructor Destructor , 5 for Polymorphism , 6 for Template , 7 for Opertor Overloading , 8 for File Handling , 9 for Exception Handling , and 10 for EXIT\n"<<endl;
+        cin >> n;
+        switch (n)
+        {
+        case 1:
+        {
+            function();
+            break;
+        }
+        case 2:
+        {
+            // create object of Room class
+            Room room1;
+            // assign values to data members
+            room1.length = 42.5;
+            room1.breadth = 30.8;
+            room1.height = 19.2;
+
+            // calculate and display the area and volume of the room
+            cout << "Area of Room =  " << room1.calculateArea() << endl;
+            cout << "Volume of Room =  " << room1.calculateVolume() << endl;
+            break;
+        }
+        case 3:
+        {
+            // Create object of the Dog class
+            Dog dog1;
+
+            // Calling members of the base class
+            dog1.eat();
+            dog1.sleep();
+
+            // Calling member of the derived class
+            dog1.bark();
+            break;
+        }
+        case 4:
+        {
+            // creating objects of class using parameterized constructor
+            class_name obj(5,6);
+            break;
+        }
+        case 5:
+        {
+            int b, bs, h, r, l;
+            float are;
+            cout << "\nEnter the Radius of Circle: \n";
+            cin >> r;
+            are = area(r);
+            cout << "\nArea of Circle: " << are << endl;
+            cout << "Enter the Base & Hieght of Triangle:\n";
+            cin >> bs;
+            cin >> h;
+            are = area(0.5, b, h);
+            cout << "\nArea of Triangle: " << are << endl;
+            cout << "\nEnter the Length & Bredth of Rectangle: \n";
+            cin >> l >> b;
+            are = area(l, b);
+            cout << "\nArea of Rectangle: " << are << endl;
+            break;
+        }
+        case 6:
+        {
+             int a,b;
+            float x,y;
+            cout<<"\nEnter two integer data: ";
+            cin>>a>>b;
+            cout<<"\nEnter two float data: ";
+            cin>>x>>y;
+            sum(a,b); 
+            sum(x,y); 
+            break;
+        }
+        case 7:
+        {
+            Count count1;
+            // Call the "void operator ++ ()" function
+            ++count1;
+
+            count1.display();
+            break;
+        }
+        case 8:
+        {
+            ofstream MyFile("file1.txt");
+            MyFile <<"This is OOP Assignment 4";
+            string myText;
+            ifstream MyFileRead("file1.txt");
+            while (getline(MyFileRead, myText))
+            {
+                cout << myText;
+            }
+            MyFile.close();
+            MyFileRead.close();
+            break;
+        }
+        case 9:
+        {
+            int main()
+            {
+                try 
+                {
+                    fun(NULL, 0);
+                }
+                catch(...) 
+                {
+                    cout << "Caught exception from fun()";
+                }
+            }
+            break;
+        }
+        case 10:
+        {
+            exit(0);
+            break;
+        }
+        }
+    } while (c != 10);
+    return 0;
+}
